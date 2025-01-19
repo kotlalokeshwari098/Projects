@@ -1,6 +1,0 @@
-data attribute=allows us to attach any info to an element
-syntax=>is just an HTML attribute
-
-datathostart name-kebabcase  value
-data-product-name="${product.name}"
-const productName=button.dataset.productName; camel case

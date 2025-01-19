@@ -1,12 +1,12 @@
-import {cart} from "../data/cart.js"
+import { cart ,addToCart} from "../data/cart.js"
 import { products } from "../data/products.js";
 
 
-let productsHTML='';
+let productsHTML = '';
 
 // producing the products cards using js without writing all again
 products.forEach((product) => {
-    productsHTML += `
+  productsHTML += `
       <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -26,7 +26,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            $${(product.priceCents/100).toFixed(2)}
+            $${(product.priceCents / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container ">
@@ -59,62 +59,49 @@ products.forEach((product) => {
 })
 
 // putting html o the page using js
-document.querySelector('.js-products-grid').innerHTML=productsHTML;
+document.querySelector('.js-products-grid').innerHTML = productsHTML;
 const addedMessageTimeouts = {};
 
-document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
-     button.addEventListener('click',()=>{
-      const {productId}=button.dataset;   
-        // dataset gives all the data attributes attached to  button
-        let matchingItem;
+// this update also done on ui of amazon so kept here
+function updateCart(productId){
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    })
+
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+    console.log(cart);
+
+}
+
+// display this msg on amazon.html page so kept here
+function addedToCartMessage(productId){
+  document.querySelector('.added-to-cart').classList.add(`js-added-to-cart-${productId}`);  
+
+  const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`)
+  addedMessage.classList.add('added-to-cart-visible');
+  let previousTimeout = addedMessageTimeouts[productId]
+  if (previousTimeout) {
+    clearTimeout(timeoutId)
+  }
+  let timeoutId = setTimeout(() => {
+    document.querySelector('.added-to-cart').classList.remove('added-to-cart-visible')
+  }, 2000)
+
+  addedMessageTimeouts[productId] = timeoutId;
+}
 
 
-        cart.forEach((item)=>{
-             if(productId === item.productId){
-                   matchingItem=item;
-             }
-        })
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+  button.addEventListener('click', () => {
+    const { productId } = button.dataset;
+    // dataset gives all the data attributes attached to  button
 
-        document.querySelector('.added-to-cart').classList.add(`js-added-to-cart-${productId}`);
-
-
-        let selectCart=document.querySelector(`.js-quantity-selector-${productId}`)
-        let cartValue=Number(selectCart.value)
-        console.log(cartValue)
-        // check product is already in cart
-        if(matchingItem){
-          matchingItem.quantity += cartValue;
-        }
-        // if yes increase quantity
-        else{
-          cart.push({
-            productId,
-            quantity:cartValue
-          })
-        }
-
-       let cartQuantity=0;
-        cart.forEach((cartItem)=>{
-            cartQuantity+=cartItem.quantity;
-        })
-
-        document.querySelector('.js-cart-quantity').innerHTML=cartQuantity;
-        console.log(cart);
-
-
-        const addedMessage=document.querySelector(`.js-added-to-cart-${productId}`)
-        addedMessage.classList.add('added-to-cart-visible');
-        let previousTimeout=addedMessageTimeouts[productId]
-        if(previousTimeout){
-          clearTimeout(timeoutId)
-        }
-        let timeoutId=setTimeout(()=>{
-          document.querySelector('.added-to-cart').classList.remove('added-to-cart-visible')
-        },2000)
-
-        addedMessageTimeouts[productId] = timeoutId;
-       
-     })
+    addToCart(productId);
+    // for this cart quantity will be effected so kept in cart.js file
+    updateCart(productId)
+    addedToCartMessage(productId)
+  })
 })
 
 
