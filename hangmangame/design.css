@@ -1,0 +1,238 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+html, body {
+    height: 100vh;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   background: #2233a1;
+}
+.container{
+    border: 2px solid black;
+   height: 80%;
+   width: 70%;
+   background: white;
+   border-radius: 15px;
+   display: flex;
+   flex-direction: row;
+   padding: 40px;
+   gap: 40px;
+   /* position: absolute; */
+}
+.left{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  
+}
+.right{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    text-align: center;
+}
+.keyboard{
+    display: flex;
+    flex-wrap:wrap;
+    gap: 10px;
+    justify-content: center;
+    
+}
+.alpha{
+    border-radius: 5px;
+    padding: 8px;
+    width: 40px;
+    color: white;
+    background: #2233a1;
+   cursor: pointer;
+
+}
+.diagram{
+    position: relative;
+ /* Responsive height */
+    width: 100%;
+    
+}
+.base{
+    width: 300px;
+    background: black;
+    height: 5px;
+    border-radius: 15px;
+    position:absolute;
+    /* bottom: 0; */
+}
+.stick{
+    position: relative;
+    left: 50px;
+    width: 5px;
+    height: 250px;
+    background: black;
+    border-radius: 15px;
+    z-index: 1;
+}
+.stick-top{
+    width: 180px;
+    background: black;
+    height: 5px;
+    border-radius: 15px;
+    position: absolute;
+    left: 50px;
+}
+.stick-top-extension{
+    position: absolute;
+    width: 5px;
+    height: 53px;
+    background: black;
+    left: 229px;
+    top: 0px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.head{
+    position: absolute;
+    left: 212px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    border: 2px solid black;
+    top: 50px;
+    display: none;
+}
+.head-body{
+    position:absolute;
+    height: 75px;
+    width: 2px;
+    border: 2px solid black;
+    top: 90px;
+    left: 230px;
+    display: none;
+}
+.head-body-left{
+      position: absolute;
+      height: 50px;
+      width: 2px;
+      border: 2px solid black;
+      top: 83px;
+      left: 210px;
+      transform: rotate(45deg);
+      display: none;
+}
+.head-body-right{
+        position: absolute;
+        height: 50px;
+        width: 2px;
+        border: 2px solid black;
+        top: 83px;
+        left: 250px;
+        transform: rotate(135deg);
+        display: none;
+}
+.head-body-bottom-left{
+    position: absolute;
+    height: 50px;
+    width: 2px;
+    border: 2px solid black;
+    top: 158px;
+    left: 213px;
+    transform: rotate(45deg);
+    display: none;
+}
+.head-body-bottom-right{
+    position: absolute;
+    height: 50px;
+    width: 2px;
+    border: 2px solid black;
+    top: 158px;
+    left: 248px;
+    transform: rotate(135deg);
+    display: none;
+}
+ .result-container{
+    position:fixed;
+    background: rgb(0,0,0,0.6);
+     font-size: 40px;
+     font-weight: 600;
+     border: 2px solid black;
+   width: 100vw;
+   height: 100vh;
+   top: 0;
+   left: 0;
+   display: none;
+
+ } 
+.result-display-container{
+    background: rgba(243, 238, 238, 0.963);
+    /* border: 2px solid black; */
+    box-shadow: 5px 10px 15px ;
+    border-radius: 15px;
+    color: black;
+    width: 50%;
+    height: 60%;
+    position: fixed;
+    padding: 20px;
+
+}
+.overlay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.result-button{
+    padding: 10px;
+    background: #2233a1;
+    color: white;
+    width: 140px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+@media screen and (max-width:1200px){
+     .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 1100px;
+        position: absolute;
+        border-radius: 20px;
+        top: 5px;
+     }
+     .left{
+        position: absolute;
+        /* top: 300px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 50px;
+        width: 80%;
+        gap: 50px;
+        text-align: center;
+     }
+     .diagram{
+        /* margin-left: 0px; */
+        position: relative;
+        left: 0px;
+        margin: 0 auto;
+     }
+     .right{
+        position: absolute;
+        top: 400px;
+        font-size: 25px;
+     }
+}

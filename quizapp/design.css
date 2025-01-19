@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgba(69, 11, 87, 0.683);
+}
+
+:where(.config-container, .quiz-container, .result-container) {
+    display: none;
+    background: white;
+    box-shadow: 5px 5px 10px;
+    border-radius: 7px;
+}
+
+.config-container {
+    border: 2px solid black;
+    padding: 20px;
+    width: 415px;
+    text-align: center;
+}
+
+.config-container .config-title {
+    font-size: 1.3rem;
+}
+
+.config-container .config-option {
+    margin-top: 20px;
+}
+
+.config-option .category-options {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.option-title {
+    margin: 10px;
+    font-size: 20px;
+}
+
+.config-option button {
+    padding: 12px;
+    font-size: 0.938rem;
+    font-weight: 500;
+    background: #ffff;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid black;
+    transition: 0.3s ease;
+}
+
+.config-option button:hover,
+.quiz-content .answer-option:hover {
+    background: #dad5fd;
+}
+
+.config-option button.active {
+    color: #4937ad;
+    border-color: #4937ad;
+    background: #dfdafd;
+}
+
+
+.config-option .question-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+
+}
+
+.question-options button {
+    /* flex: [flex-grow] [flex-shrink] [flex-basis]; */
+    flex: 1 1 10%;
+}
+
+.config-container .start-quiz-btn,.result-container .try-again-btn {
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    background: rgba(69, 11, 87, 0.683);
+    padding: 13px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.start-quiz-btn:hover ,.try-again-btn:hover{
+    background: rgba(69, 11, 87, 0.589);
+}
+
+/* quiz container */
+.quiz-container {
+    display: none;
+    width: 480px;
+}
+
+.quiz-container .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
+}
+
+.quiz-header .quiz-title {
+    font-size: 1.43rem;
+    font-weight: 700;
+}
+
+.quiz-header .quiz-timer {
+    display: flex;
+    width: 70px;
+    color: #fff;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+    padding: 7px 9px;
+    border-radius: 6px;
+    background: rgba(102, 32, 138, 0.589);
+}
+
+.quiz-header .quiz-timer span {
+    font-size: 1.4rem;
+}
+
+.quiz-container .quiz-content {
+    padding: 20px 25px 25px;
+}
+
+.quiz-content .question-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.quiz-content .answer-options {
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.quiz-content .answer-option {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 16px;
+    background: rgba(103, 32, 138, 0.237);
+    border-radius: 5px;
+    margin: 10px;
+    border: 2px solid rgba(25, 7, 33, 0.237);
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.quiz-content .answer-option.correct {
+    color: green;
+    background: #D4EDDA;
+    border-color: #B7E1C1;
+
+}
+
+/* Scenario: You’re looking for managers (answer-option) who are also performing employee duties (correct). */
+/* if space there between them then Scenario: You’re looking for employees (correct) who work under managers (answer-option) in the same building. */
+
+/* .correct {
+    color: green !important;
+    background: #D4EDDA !important;
+    border-color: #B7E1C1 !important;
+
+} */
+.quiz-content .answer-option.wrong {
+    color: red;
+    background: rgba(225, 163, 163, 0.573);
+    border-color: #e59a9a;
+}
+/* .wrong {
+    color: red !important;
+    background: rgba(225, 163, 163, 0.573) !important;
+    border-color: #e59a9a !important;
+} */
+
+.quiz-content .answer-option span {
+    display: block;
+    flex-shrink: 0;
+    margin: -4px -3px -4px 12px;
+}
+
+.quiz-footer {
+    padding: 15px 9px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #c6c6c6;
+}
+
+.quiz-footer .next-question-btn {
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background: rgba(69, 11, 87, 0.683);
+    padding: 10px 18px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 6px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.quiz-footer .question-status,.result-container .result-message b{
+    font-weight: 700;
+
+}
+
+.next-question-btn:hover {
+    background: rgba(69, 11, 87, 0.589);
+}
+
+.result-container {
+   display: none;
+    text-align: center;
+    padding: 40px;
+    width: 410px;
+}
+
+.result-container .result-img {
+    width: 110px;
+
+}
+
+.result-container .result-title {
+    margin-top: 30px;
+}
+
+.result-container .result-message {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-top: 15px;
+}
+.result-container .try-again-btn{
+    padding: 10px 15px;
+    margin: 20px;
+}
