@@ -1,2 +1,2 @@
 // storing everything related to cart
-const cart=[];
+export const cart=[];
