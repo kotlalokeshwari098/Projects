@@ -2,6 +2,9 @@ import { cart ,addToCart} from "../data/cart.js"
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
+import { calculateCartQuantity } from "../data/cart.js";
+// as this is common for both cart item showing in right top and checkout items so written in cart.js as it related to cart
+
 
 let productsHTML = '';
 
@@ -64,17 +67,13 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 const addedMessageTimeouts = {};
 
 // this update also done on ui of amazon so kept here
-export function updateCart(){
+function updateCart(){
 
-    let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    })
-
+   let cartQuantity= calculateCartQuantity();
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
-    console.log(cart);
-    return cart;
+    // saveToCart();
 }
+updateCart()
 
 // display this msg on amazon.html page so kept here
 function addedToCartMessage(productId){
@@ -82,12 +81,14 @@ function addedToCartMessage(productId){
   const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`)
   console.log(addedMessage);
   addedMessage.classList.add('added-to-cart-visible');
+
   let previousTimeout = addedMessageTimeouts[productId]
+  console.log(previousTimeout)
   if (previousTimeout) {
-    clearTimeout(timeoutId)
+    clearTimeout(previousTimeout)
   }
   let timeoutId = setTimeout(() => {
-    document.querySelector('.added-to-cart').classList.remove('added-to-cart-visible')
+   addedMessage.classList.remove('added-to-cart-visible')
   }, 2000)
 
   addedMessageTimeouts[productId] = timeoutId;
@@ -101,9 +102,11 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
     addToCart(productId);
     // for this cart quantity will be effected so kept in cart.js file
-    updateCart()
+    updateCart();
+    
     addedToCartMessage(productId)
   })
 })
+
 
 
