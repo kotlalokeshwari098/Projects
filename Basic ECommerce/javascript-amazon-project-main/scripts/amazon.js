@@ -26,8 +26,8 @@ products.forEach((product) => {
             $${(product.priceCents/100).toFixed(2)}
           </div>
 
-          <div class="product-quantity-container">
-            <select>
+          <div class="product-quantity-container ">
+            <select class="js-quantity-selector-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -70,15 +70,18 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
                    matchingItem=item;
              }
         })
+        let selectCart=document.querySelector(`.js-quantity-selector-${productId}`)
+        let cartValue=Number(selectCart.value)
+        console.log(cartValue)
         // check product is already in cart
         if(matchingItem){
-          matchingItem.quantity+=1;
+          matchingItem.quantity += cartValue;
         }
         // if yes increase quantity
         else{
           cart.push({
             productId:productId,
-            quantity:1
+            quantity:cartValue
           })
         }
 
@@ -89,6 +92,9 @@ document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
 
         document.querySelector('.js-cart-quantity').innerHTML=cartQuantity;
         console.log(cart);
+
+
+       
      })
 })
 
