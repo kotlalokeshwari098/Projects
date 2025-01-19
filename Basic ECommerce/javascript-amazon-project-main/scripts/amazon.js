@@ -47,7 +47,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart js-added-to-cart-{product.id}">
+          <div class="added-to-cart js-added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -64,7 +64,7 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 const addedMessageTimeouts = {};
 
 // this update also done on ui of amazon so kept here
-function updateCart(productId){
+export function updateCart(){
 
     let cartQuantity = 0;
     cart.forEach((cartItem) => {
@@ -73,14 +73,14 @@ function updateCart(productId){
 
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
     console.log(cart);
-
+    return cart;
 }
 
 // display this msg on amazon.html page so kept here
 function addedToCartMessage(productId){
-  document.querySelector('.added-to-cart').classList.add(`js-added-to-cart-${productId}`);  
-
+ 
   const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`)
+  console.log(addedMessage);
   addedMessage.classList.add('added-to-cart-visible');
   let previousTimeout = addedMessageTimeouts[productId]
   if (previousTimeout) {
@@ -101,7 +101,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
     addToCart(productId);
     // for this cart quantity will be effected so kept in cart.js file
-    updateCart(productId)
+    updateCart()
     addedToCartMessage(productId)
   })
 })

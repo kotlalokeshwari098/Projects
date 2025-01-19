@@ -22,6 +22,7 @@ export function addToCart(productId) {
   let matchingItem;
 
   let selectCart = document.querySelector(`.js-quantity-selector-${productId}`)
+  console.log(selectCart)
   let cartValue = Number(selectCart.value)
 
   cart.forEach((item) => {
