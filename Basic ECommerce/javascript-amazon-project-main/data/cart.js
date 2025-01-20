@@ -74,3 +74,20 @@ export function calculateCartQuantity(){
   return cartQuantity;
 }
 
+
+export function updateDeliveryOption(productId,deliveryOptionId){
+  let matchingItem;
+
+  // let selectCart = document.querySelector(`.js-quantity-selector-${productId}`)
+  // console.log(selectCart)
+  // let cartValue = Number(selectCart.value)
+
+  cart.forEach((item) => {
+    if (productId === item.productId) {
+      matchingItem = item;
+    }
+  })
+   matchingItem.deliveryOptionId=deliveryOptionId;
+
+   saveToStorage();
+}
