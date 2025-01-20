@@ -20,6 +20,10 @@ const deliveryDate = today.add(7, 'days');
 deliveryDate.format('dddd, MMMM D')
 console.log(deliveryDate.format('dddd, MMMM D'));
 
+// render means display on the page
+function renderOrderSummary(){
+
+
 let cartSummaryHTML = '';
 cart.forEach((cartItem) => {
   // using productid from cart to  get full info product from products.js
@@ -192,5 +196,9 @@ document.querySelectorAll('.js-delivery-option').forEach((element)=>{
         let {productId,deliveryOptionId} = element.dataset;
         // let  updateDeliveryOption  = element.dataset.updateDeliveryOption;
         updateDeliveryOption(productId,deliveryOptionId);
+        renderOrderSummary();
+        // recursion function calling itself
       })
-})
+  })
+}
+renderOrderSummary();
