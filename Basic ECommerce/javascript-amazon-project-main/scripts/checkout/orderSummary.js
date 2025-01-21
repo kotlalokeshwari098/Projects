@@ -12,6 +12,8 @@ import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 
+import { renderPaymentSummary } from "./paymentSummary.js";
+
 
 
 hello();
@@ -138,6 +140,9 @@ export function renderOrderSummary() {
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
       updateCartQuantity();
+
+      renderPaymentSummary();
+      // after deleting the items in cart inorder to update ordersummary we are regenerating the html for that again ->>like considering the items present at that time inthe cart and updating ordersummary
     })
   })
 
@@ -185,6 +190,8 @@ export function renderOrderSummary() {
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
       // recursion function calling itself
+
+      renderPaymentSummary();
     })
   })
 }
