@@ -37,3 +37,5 @@ else{
 }
 
 
+// create suits ---create tests---compare values and display result
+// Jasmine testing framework
