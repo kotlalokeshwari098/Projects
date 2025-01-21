@@ -14,13 +14,24 @@ import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.j
 
 import { renderPaymentSummary } from "./paymentSummary.js";
 
+import { renderCheckoutHeader } from "./checkoutHeader.js";
+
+import { calculateDeliveryDate } from "../../data/deliveryOptions.js";
+
 
 
 hello();
 const today = dayjs();
-const deliveryDate = today.add(7, 'days');
+// const deliveryDate = today.add(5, 'days');
+// const deliveryDate = today.add(5, 'month');
+const deliveryDate = today.add(1, 'day');
 deliveryDate.format('dddd, MMMM D')
-console.log(deliveryDate.format('dddd, MMMM D'));
+
+
+function isWeekend(today){
+   const dayString=today.format('dddd');
+  return dayString==='saturday' || dayString==='sunday';
+}
 
 // render means display on the page
 export function renderOrderSummary() {
@@ -37,9 +48,8 @@ export function renderOrderSummary() {
 
     let deliveryOption = getDeliveryOption(deliveryOptionId);
 
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-    const dateString = deliveryDate.format("dddd, MMMM D");
+    let dateString=calculateDeliveryDate(deliveryOption);
+
 
     cartSummaryHTML +=
 
@@ -91,10 +101,9 @@ export function renderOrderSummary() {
   function deliveryOptionsHTML(matchingProduct, cartItem) {
     let HTML = "";
     deliveryOptions.forEach((deliveryOption) => {
-      const today = dayjs();
-      const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-      const dateString = deliveryDate.format("dddd, MMMM D");
 
+      let dateString=calculateDeliveryDate(deliveryOption);
+// the function present in deliveryOptions.js
       const priceString = deliveryOption.priceCents
         === 0
         ? "FREE"
@@ -142,15 +151,16 @@ export function renderOrderSummary() {
       updateCartQuantity();
 
       renderPaymentSummary();
+      // console.log("rendering payment summary")
       // after deleting the items in cart inorder to update ordersummary we are regenerating the html for that again ->>like considering the items present at that time inthe cart and updating ordersummary
     })
   })
 
 
   function updateCartQuantity() {
-    let cartQuantity = calculateCartQuantity()
+    
+    renderCheckoutHeader();
 
-    document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
   }
 
 
