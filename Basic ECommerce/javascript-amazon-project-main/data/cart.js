@@ -1,7 +1,11 @@
 // storing everything related to cart
-export let cart =JSON.parse(localStorage.getItem('cart'));
+export let cart;
 // this cart contains whatever we push by clicking add to cart
-if(!cart){
+loadFromStorage();
+
+export function loadFromStorage(){
+  cart =JSON.parse(localStorage.getItem('cart'));
+  if(!cart){
     cart=[{
       productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
       quantity: 2,
@@ -12,6 +16,8 @@ if(!cart){
       deliveryOptionId:'2'
     }] 
 }
+}
+
 
 
 
@@ -25,9 +31,9 @@ function saveToStorage() {
 export function addToCart(productId) {
   let matchingItem;
 
-  let selectCart = document.querySelector(`.js-quantity-selector-${productId}`)
-  console.log(selectCart)
-  let cartValue = Number(selectCart.value)
+  // let selectCart = document.querySelector(`.js-quantity-selector-${productId}`)
+  // console.log(selectCart)
+  // let cartValue = Number(selectCart.value)
 
   cart.forEach((item) => {
     if (productId === item.productId) {
@@ -36,13 +42,13 @@ export function addToCart(productId) {
   })
   // check product is already in cart
   if (matchingItem) {
-    matchingItem.quantity += cartValue;
+    matchingItem.quantity +=1;
   }
   // if yes increase quantity
   else {
     cart.push({
       productId,
-      quantity: cartValue,
+      quantity: 1,
       deliveryOptionId:'1'
     })
   }
