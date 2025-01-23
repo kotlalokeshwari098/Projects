@@ -2,14 +2,16 @@
 // @ts-nocheck
 class Cart {
   cartItems;
-  localStorageKey;
+  // it is public property
+  #localStorageKey;
+  // it is private property
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage();
   }
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
     if (!this.cartItems) {
       this.cartItems = [{
         productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -23,7 +25,7 @@ class Cart {
     }
   }
   saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
 
   }
   // @ts-ignore
@@ -89,6 +91,8 @@ class Cart {
 const cart = new Cart('cart-oop');
 // 2nd cart for amazon bussiness website where amazon shopping clothes has one cart and bussiness has other separate cart
 const businessCart = new Cart('cart-business');
+
+// cart.#localStorageKey='test';
 
 
 console.log(cart);
