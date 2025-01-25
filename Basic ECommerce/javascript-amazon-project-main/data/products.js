@@ -53,7 +53,34 @@ class Clothing extends Product{
     </a>`;
   }
 }  
-let tshirt=new Clothing();
+
+/*
+const date=new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());
+DayJs uses date in bts
+
+console.log(this);
+o/p undefined
+*/
+/*
+function logThis(){
+  console.log(this)
+}
+logThis();  //here this is undefined
+logThis.call('hello');//does same as func calling but able to set value of this here to hello
+// arrow functions do not change value of this
+
+// this
+const objects={
+  method:()=>{
+    console.log(this);
+  }
+}
+console.log(objects.method());
+// here this is same as this writing outside like in 74 both point to undefined
+*/
+
 export let products = [
   { 
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -186,25 +213,6 @@ export let products = [
       "running shoes",
       "footwear"
     ]
-  },
-  {
-    id: "5968897c-4d27-4872-89f6-5bcb052746d7",
-    image: "images/products/women-chiffon-beachwear-coverup-black.jpg",
-    name: "Women's Chiffon Beachwear Cover Up - Black",
-    rating: {
-      stars: 4.5,
-      count: 235
-    },
-    priceCents: 2070,
-    keywords: [
-      "robe",
-      "swimsuit",
-      "swimming",
-      "bathing",
-      "apparel"
-    ],
-    type: "clothing",
-    sizeChartLink: "images/clothing-size-chart.png"
   },
   {
     id: "aad29d11-ea98-41ee-9285-b916638cac4a",
@@ -702,5 +710,6 @@ export let products = [
      return new Product(productDetails);
 });
 
-console.log(products);
-console.log(tshirt);
+// console.log(products);
+// console.log(tshirt);
+
