@@ -1,5 +1,7 @@
 import formatCurrency from "../scripts/utils/money.js";
 
+
+
 let matchingProduct;
 export function getProduct(productId){
   products.forEach((product) => {
@@ -80,7 +82,38 @@ const objects={
 console.log(objects.method());
 // here this is same as this writing outside like in 74 both point to undefined
 */
+// lets load products from backend not from that below one object
+export let products=[];
+export function loadProducts(fun){
+  
+  const xhr=new XMLHttpRequest();
+  // generate new request object
 
+  xhr.addEventListener('load',()=>{
+    products=JSON.parse(xhr.response).map((productDetails)=>{
+      if(productDetails.type==='clothing'){
+       return new Clothing(productDetails);
+      }
+     // converting object into class it creates a new array so returning that one
+        return new Product(productDetails);
+   });
+   fun();
+
+   console.log('load product');
+  })
+  xhr.open('GET','https://supersimplebackend.dev/products');
+  xhr.send();
+  // it will just send not wait so to wait use event listener  
+  console.log(fun);
+  // here fun is a callback function
+  
+  // after loading response we running the function as response takes some time to come so after loading we are running to show on page the products list
+}
+
+
+
+
+/*
 export let products = [
   { 
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -709,6 +742,7 @@ export let products = [
   // converting object into class it creates a new array so returning that one
      return new Product(productDetails);
 });
+*/
 
 // console.log(products);
 // console.log(tshirt);
