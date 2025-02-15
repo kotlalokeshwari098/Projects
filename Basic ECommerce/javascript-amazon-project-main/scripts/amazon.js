@@ -1,6 +1,6 @@
 import { cart ,addToCart} from "../data/cart.js"
 import { products } from "../data/products.js";
-import { formatCurrency } from "./utils/money.js";
+// import { formatCurrency } from "./utils/money.js";
 
 import { calculateCartQuantity } from "../data/cart.js";
 // as this is common for both cart item showing in right top and checkout items so written in cart.js as it related to cart
