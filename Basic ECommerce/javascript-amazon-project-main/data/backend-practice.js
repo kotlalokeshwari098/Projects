@@ -13,3 +13,5 @@ xhr.open('GET','https://supersimplebackend.dev');
 xhr.send();
 // xhr.response;
 // here it will be undefined as it is a async code so use event listener so when i will be loaded the response can be used
+
+// using browser=making get request

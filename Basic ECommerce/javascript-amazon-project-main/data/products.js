@@ -89,27 +89,29 @@ export function loadProducts(fun){
   const xhr=new XMLHttpRequest();
   // generate new request object
 
-  xhr.addEventListener('load',()=>{
-    products=JSON.parse(xhr.response).map((productDetails)=>{
-      if(productDetails.type==='clothing'){
-       return new Clothing(productDetails);
-      }
-     // converting object into class it creates a new array so returning that one
-        return new Product(productDetails);
-   });
-   fun();
 
-   console.log('load product');
+  xhr.addEventListener('load',()=>{
+   products= JSON.parse(xhr.response).map((productDetails)=>{
+    if(productDetails.type==='clothing'){
+      return new Clothing(productDetails);
+    }
+    return new Product(productDetails);
+   });
+
+   console.log('load Products');
+   fun()
+  // here fun is a callback function
+
   })
   xhr.open('GET','https://supersimplebackend.dev/products');
   xhr.send();
   // it will just send not wait so to wait use event listener  
   console.log(fun);
-  // here fun is a callback function
   
   // after loading response we running the function as response takes some time to come so after loading we are running to show on page the products list
 }
 
+loadProducts();
 
 
 

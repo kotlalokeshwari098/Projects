@@ -6,9 +6,9 @@ import { calculateCartQuantity } from "../data/cart.js";
 // as this is common for both cart item showing in right top and checkout items so written in cart.js as it related to cart
 import { loadProducts } from "../data/products.js";
 
-loadProducts(renderProducts);
+loadProducts(renderProductsGrid);
 
-function renderProducts(){
+function renderProductsGrid(){
 let productsHTML = '';
 
 // producing the products cards using js without writing all again
