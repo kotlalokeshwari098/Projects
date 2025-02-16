@@ -6,7 +6,27 @@ import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
 import { loadProducts,loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
-// as it return promise no need to make a new promise and return it, in line 11
+async function loadPage(){
+    console.log('load page')
+
+    await loadProductsFetch()
+    // this returns a promise
+    // so here when this finishes before going to next step so without writing then() we are able to doit
+    await new Promise((resolve)=>{
+        loadCart(()=>{
+            resolve();
+        })
+    })
+        renderOrderSummary();
+        renderPaymentSummary();
+        renderCheckoutHeader();
+    
+}
+loadPage()
+
+
+/*
+// as it return promise no need to make a new promise and return it, in next line of promise.all(
 Promise.all([
     loadProductsFetch(),
     
