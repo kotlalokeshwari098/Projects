@@ -86,17 +86,11 @@ export function renderPaymentSummary(){
                 console.log('unexpected error try again later')
             }
             
-            window.location.href='orders.html'
+            window.location.href='orders.html'          
           })
 
 }
-// to send data in a request we need to use a different type of request there are 4 types they are 
-// GET-get something from backend
-// POST-create something here it lets us to send data to backend
-//  PUT-update something
-//  DELETE-delete something
-// headers gives the backend more information about our request
-// body is the actual data we need to send to backend and send in form of json string form only not in object form
+
 
 
 
