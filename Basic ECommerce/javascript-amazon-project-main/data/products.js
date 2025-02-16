@@ -101,9 +101,9 @@ export function loadProductsFetch(){
      })
      console.log('load Products');
     })
-    //  .catch(()=>{
-    //   console.log("error please try again later!!!!!!!!!!")
-    //  })    
+     .catch(()=>{
+      console.log("error please try again later!!!!!!!!!!")
+     })    
    return promise;
 }
 /*
@@ -111,7 +111,7 @@ loadProductsFetch().then(()=>{
   console.log('nextstep')
 });
 */
-// loadProductsFetch();
+loadProductsFetch();
 
 
 export function loadProducts(fun){
@@ -144,7 +144,7 @@ export function loadProducts(fun){
   // after loading response we running the function as response takes some time to come so after loading we are running to show on page the products list
 }
 
-// loadProducts();
+loadProducts();
 
 
 

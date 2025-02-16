@@ -10,6 +10,7 @@ import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import {formatCurrency}
 from "../utils/money.js";
 import { calculateCartQuantity } from "../../data/cart.js";
+import { addOrder } from "../../data/orders.js";
 
 
 
@@ -61,12 +62,41 @@ export function renderPaymentSummary(){
             <div class="payment-summary-money">$${formatCurrency(totalCents)}</div>
           </div>
 
-          <button class="place-order-button button-primary">
+          <button class="place-order-button button-primary js-place-order">
             Place your order
           </button>`
+
+
           document.querySelector('.js-payment-summary').innerHTML=paymentSummaryHTML;
 
+          document.querySelector('.js-place-order').addEventListener('click', async()=>{
+            try{
+              const response=await fetch('https://supersimplebackend.dev/orders',{
+                method:'POST',
+                headers:{
+                    'content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                  cart: cart
+                })
+              });
+             const order= await response.json();
+             addOrder(order);
+            }catch(error){
+                console.log('unexpected error try again later')
+            }
+            
+            window.location.href='orders.html'
+          })
+
 }
+// to send data in a request we need to use a different type of request there are 4 types they are 
+// GET-get something from backend
+// POST-create something here it lets us to send data to backend
+//  PUT-update something
+//  DELETE-delete something
+// headers gives the backend more information about our request
+// body is the actual data we need to send to backend and send in form of json string form only not in object form
 
 
 

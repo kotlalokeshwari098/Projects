@@ -41,6 +41,7 @@ export function renderOrderSummary() {
   cart.forEach((cartItem) => {
     // using productid from cart to  get full info product from products.js
     const productId = cartItem.productId;
+    // console.log(productId)
 
     const matchingProduct = getProduct(productId);
 

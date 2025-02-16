@@ -12,7 +12,7 @@ async function loadPage(){
         await loadProductsFetch()
         // this returns a promise
         // so here when this finishes before going to next step so without writing then() we are able to doit
-        const value=await new Promise((resolve,reject)=>{
+        await new Promise((resolve,reject)=>{
             // throw 'error2';
             loadCart(()=>{
                 // reject('error3')
