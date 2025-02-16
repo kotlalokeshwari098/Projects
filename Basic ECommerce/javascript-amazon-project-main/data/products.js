@@ -91,17 +91,19 @@ export function loadProductsFetch(){
    .then((response)=>{
       return response.json();
       // returing promise
-   }).then((productsData)=>{
+   })
+   .then((productsData)=>{
     productsData.map((productDetails)=>{
       if(productDetails.type==='clothing'){
         return new Clothing(productDetails);
       }
       return new Product(productDetails);
-     });
-  
+     })
      console.log('load Products');
-     
-   })
+    })
+    //  .catch(()=>{
+    //   console.log("error please try again later!!!!!!!!!!")
+    //  })    
    return promise;
 }
 /*
@@ -109,6 +111,7 @@ loadProductsFetch().then(()=>{
   console.log('nextstep')
 });
 */
+// loadProductsFetch();
 
 
 export function loadProducts(fun){
@@ -130,15 +133,18 @@ export function loadProducts(fun){
   // here fun is a callback function
 
   })
+  xhr.addEventListener('error',(error)=>{
+    console.log("error please try again later")
+  })
   xhr.open('GET','https://supersimplebackend.dev/products');
   xhr.send();
   // it will just send not wait so to wait use event listener  
-  console.log(fun);
+  // console.log(fun);
   
   // after loading response we running the function as response takes some time to come so after loading we are running to show on page the products list
 }
 
-loadProducts();
+// loadProducts();
 
 
 

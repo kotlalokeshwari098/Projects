@@ -7,19 +7,26 @@ import { loadProducts,loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 async function loadPage(){
-    console.log('load page')
-
-    await loadProductsFetch()
-    // this returns a promise
-    // so here when this finishes before going to next step so without writing then() we are able to doit
-    await new Promise((resolve)=>{
-        loadCart(()=>{
-            resolve();
+    try{
+        // throw 'error1';
+        await loadProductsFetch()
+        // this returns a promise
+        // so here when this finishes before going to next step so without writing then() we are able to doit
+        const value=await new Promise((resolve,reject)=>{
+            // throw 'error2';
+            loadCart(()=>{
+                // reject('error3')
+                resolve('value3');
+            });
         })
-    })
-        renderOrderSummary();
-        renderPaymentSummary();
-        renderCheckoutHeader();
+
+    }
+    catch(error){      
+        console.log("error please try again later!!!!!!!!!!",error) 
+    }
+    renderOrderSummary();
+    renderPaymentSummary();
+    renderCheckoutHeader();
     
 }
 loadPage()
